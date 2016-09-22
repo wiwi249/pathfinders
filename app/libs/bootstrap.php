@@ -63,46 +63,6 @@ class Bootstrap {
 			$view->set('lgmsgtype', "4");
 		}
 		
-		/*$controller_info = $this->get_controller_data($url[0]);
-		
-		/*if($controller_info == 0) {
-			//Check if url is a subpage, if not return an error.
-			$query = $db->MakeQuery("SELECT url FROM cms_pages WHERE url='".$url[0]."';");
-			if($db->NumRows($query)) {
-				require_once('controllers/pages.php');
-				$controller = new Page($url[0]);
-				return;
-			}
-			$results = $db->FetchRes($query);
-			require_once('controllers/error.php');
-			$controller = new Error;
-			return;
-		}
-		
-		if(!controller_info) {
-			require_once('controllers/error.php');
-			$controller = new Error;
-			return;
-		}
-
-		$path = 'controllers/'.$controller_info['filename'].'.php';
-			
-		if(!file_exists($path)) {
-			require_once('controllers/error.php');
-			$controller = new Error;
-			return;
-		}
-		else {
-			require_once($path);
-			$controller = new $controller_info['filename'];
-			if(isset($url[1])) {
-				if(isset($url[2]))
-					@$controller->{$url[1]}($url[2]);//TO JEST BEZNADZIEJNY POMYSŁ!!!
-				else
-					@$controller->{$url[1]}();
-			}
-			return;
-		}*/
 		$path = 'controllers/'.$url[0].'.php';
 		if(!file_exists($path)) {
 			require_once('controllers/error.php');
@@ -113,20 +73,13 @@ class Bootstrap {
 			require_once($path);
 			if(isset($url[1])) {
 				if(isset($url[2]))
-					@$controller = new $url[0]($url[1], $url[2]);
+					$controller = new $url[0]($url[1], $url[2]);
 				else
-					@$controller = new $url[0]($url[1]);
+					$controller = new $url[0]($url[1]);
 			} else {
-				@$controller = new $url[0];
+				$controller = new $url[0];
 			}
 
-			/*$controller = new url[0];
-			if(isset($url[1])) {
-				if(isset($url[2]))
-					@$controller->{$url[1]}($url[2]);//TO JEST BEZNADZIEJNY POMYSŁ!!!
-				else
-					@$controller->{$url[1]}();
-			}*/
 			return;
 		}
 	}

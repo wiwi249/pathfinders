@@ -4,7 +4,7 @@ class Menu {
 		function __construct($func, $arg) {
 			global $db, $site, $user;
 			
-			$query = $db->MakeQuery("SELECT menu FROM menus GROUP BY menus");
+			$query = $db->MakeQuery("SELECT menu FROM menus WHERE parent IS NULL");
 			
 		}	
 };

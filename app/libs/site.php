@@ -18,8 +18,12 @@ class Site {
 	public function loadFunctions() {
 		$dir = scandir("functions");
 		foreach($dir as $nom) {			
-			if($nom != ".." && $nom != ".")
-				include_once("/functions/".$nom);
+			if($nom != ".." && $nom != "." && !is_dir("functions/".$nom))
+				include_once("functions/".$nom);
 		}
+	}
+	
+	public function loadFunctionFile($type, $func) {
+		@include_once("functions/".$type."/".$func);
 	}
 }

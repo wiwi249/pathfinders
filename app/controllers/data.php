@@ -58,10 +58,10 @@ class Data {
 			$query .= " LIMIT 0,30";
 		}
 		
-		//for debug
+		/*for debug
 		$content .= $query;
 		$content .= navigationButton("GUZIK", $site->siteurl, "", 0);
-		
+		*/
 		$q = $db->MakeQuery($query);
 		if($db->NumRows($q) < 1) {
 			$content .="Brak wyników.";
@@ -86,7 +86,78 @@ class Data {
 		
 	}
 	
-	public function editData() {
+	public function editData($id) {
 		
 	}
+	
+	public function viewData($id) {
+		global $db, $view;
+		if(!is_numeric($id)) {
+			$view->AppendSiteTitle('Nie znaleziono!');
+			$view->set('header', 'Błąd!');
+			$view->set('content', "Nie znaleziono takiego członka!");
+			$view->render();
+			
+			return;
+		}
+		
+		$content = "";
+		$this->LoadDatabaseFieldTypes();
+		
+		$query = $db->MakeQuery("SELECT * FROM pathfinders WHERE id='".$id."';");
+		if($db->NumRows($query) < 1) {
+			$view->AppendSiteTitle('Nie znaleziono!');
+			$view->set('header', 'Błąd!');
+			$view->set('content', "Nie znaleziono użytkownika");
+			$view->render();
+			
+			return;
+		}
+		$res = $db->FetchRes($query);
+		
+		$view->AppendSiteTitle("Wyświetl członka");
+		$view->set('header', $res['imie']." ".$res['nazwisko']);
+		
+		$beautynames = $this->loadFieldBeautyNames();
+		
+		foreach($res as $key => $value) {
+			if($key === "id")
+				continue;
+
+			$func = $this->getDatabaseFieldType($key);
+			$rpl['value'] = $func($value);
+			$rpl['fieldname'] = $beautynames[$key]; 
+			
+			$content .= $view->getTemplate('dbase-data-row', $rpl);		
+		}
+		
+		$view->set('content', $content);
+		$view->render();
+		
+		
+	}
+	
+	public function getDatabaseFieldType($field) {
+		return "FieldTextValue"; //temporary
+	}
+	
+	public function loadFieldBeautyNames() {
+		global $db;
+		$arr = array();
+		$query = $db->MakeQuery("SELECT name, beautyname FROM fields_def");
+		while($res = $db->FetchRes($query)) {
+			$arr[$res['name']] = $res['beautyname'];
+		}
+		
+		return $arr;
+	}
+	
+	public function LoadDatabaseFieldTypes() {
+		$dir = scandir("functions/datatypes");
+		foreach($dir as $nom) {
+			if($nom != ".." && $nom != "." && !is_dir("functions/datatypes/".$nom))
+				include_once("functions/datatypes/".$nom);
+		}
+	}
 }
+

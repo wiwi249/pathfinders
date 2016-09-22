@@ -55,6 +55,7 @@ class View {
 		$values['siteurl'] = $site->siteurl;
 		$values['CURTEMPLATE_PATH'] = $this->templateInfo['currentTemplatePath'];
 		$query = $db->MakeQuery("SELECT * FROM templates WHERE name='".$template."';");
+		
 		$results = $db->FetchRes($query);
 		
 		return $this->renderTemplate($results['content'], $values);

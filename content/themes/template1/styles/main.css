@@ -119,6 +119,10 @@ input:-webkit-autofill {
 	text-align:left;
 }
 
+.bold {
+	font-weight:bold;
+}
+
 
 /* koniec frameworka, tutaj responsywne pierdoły na stronie teraz idą */
 @media only screen and (max-width: 618px) {
