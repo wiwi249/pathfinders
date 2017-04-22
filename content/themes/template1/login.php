@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{$CURTEMPLATE_PATH}styles/style.css" type="text/css" />
 <link rel="stylesheet" href="{$CURTEMPLATE_PATH}styles/main.css" type="text/css" />
 <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300italic,500,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="{$CURTEMPLATE_PATH}js/jqueryui/external/jquery/jquery.js"></script>
 <script src="{$CURTEMPLATE_PATH}js/main.js"></script>
 </head>
 <body class="loginbody">

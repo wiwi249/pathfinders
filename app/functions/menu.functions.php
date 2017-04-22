@@ -34,7 +34,7 @@ function loadMenu($menu) {
 	echo "</ul>";
 }
 
-function navigationButton($name, $url, $style, $access) {
+function navigationButton($name, $url, $style="", $access=-1) {
 	if(is_numeric($access)) {
 		if($access != -1) {
 			global $user;

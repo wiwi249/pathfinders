@@ -1,5 +1,7 @@
 <?php
-function SaveAdminNote($note) {
+function SaveAdminNote() {
+	$note = $_POST['arg'];
+	
 	if(!isset($_SESSION['id']) || !is_numeric($_SESSION['id']))
 		return;
 	

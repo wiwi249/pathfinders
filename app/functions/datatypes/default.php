@@ -1,8 +1,7 @@
 <?php
 
-
 //TEXT TYPE
-function FieldTextValue($data) {
+function FieldTextValue($field, $data) {
 	return $data;
 }
 
@@ -13,21 +12,21 @@ function FieldTextInput($name, $value = "") {
 }
 
 //DROPDOWN TYPE
-function FieldDropdownValue($data) {
+function FieldDropdownValue($field, $data) {
 	global $db;
-	$query = $db->MakeQuery("SELECT value FROM field_values WHERE name='".$data."';");
+	$query = $db->MakeQuery("SELECT name FROM fields_values WHERE value='".$data."' AND field='".$field."';");
 	$val = $db->FetchRes($query);
 	
-	return $val['value'];
+	return $val['name'];
 }
 
 function FieldDropdownInput($name, $value) {
 	global $view, $db;
 	
-	$query = $db->MakeQuery("SELECT v.value FROM `fields_values` v JOIN `fields_def` d ON v.id = d.id WHERE d.`name` = '".$name."';");
+	$query = $db->MakeQuery("SELECT v.name, v.value FROM `fields_values` v JOIN `fields_def` d ON v.id = d.id WHERE d.`name` = '".$name."';");
 	while($row = $db->NumRows($query)) {
 		if($row['value'] == $value)
-			$row['selected'] = "selected";
+			$row['selected'] = " selected";
 			
 		else 
 			$row['selected'] = "";
@@ -41,13 +40,17 @@ function FieldDropdownInput($name, $value) {
 }
 
 //DATE TYPE
-function FieldDateValue($data) {
+function FieldDateValue($field, $data) {
 	return $data;
 }
 
-function FieldDateInput($data) {
+function FieldDateInput($name, $value) {
+	global $view;
 	
+	$vals['name'] = $name;
+	$vals['value'] = $value;
 	
+	$view->getTemplate('dfield-date-input', $vals);
 	
 }
 
@@ -56,8 +59,8 @@ function FieldLongTextValue($data) {
 	return $data;
 }
 
-function FieldLongTextInput($data) {
-	return "<textarea>".$data."</textarea>";
+function FieldLongTextInput($name, $value) {
+	return "<textarea name='$name'>".$value."</textarea>";
 }
 
 //CHECKBOX TYPE

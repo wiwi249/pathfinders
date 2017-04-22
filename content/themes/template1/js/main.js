@@ -6,4 +6,4 @@ function loadPage()
         document.login.pass.focus();//the password input
         document.login.login.focus();//the login button (submitbutton)
     }
-}
+}	

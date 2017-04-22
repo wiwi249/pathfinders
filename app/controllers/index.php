@@ -9,7 +9,7 @@ class Index extends Controller {
 		$r = $db->FetchRes($query);
 		$rep['adminnote'] = $r['val'];
 		$content = "";
-		$ct['adminnote'] = $view->getTemplate('index-adminnote', $rep);
+		$ct['adminnote'] = $view->getTemplate('index-adminnote', $rep, false);
 		
 		$usersonline['content'] = "";
 		$query = $db->MakeQuery("SELECT user FROM usersessions WHERE time>".(time()-(5*60)).";");
@@ -19,7 +19,7 @@ class Index extends Controller {
 		else{
 			while($r = $db->FetchRes($query)) {
 				$uodata['avatar'] = get_profile_picture($r['user']);
-			
+				$uodata['nazwa'] = get_user_data($r['user'], "imie")." ".get_user_data($r['user'], "nazwisko");
 			//DODAĆ JOIN I POBIERANIE NICKU
 				$usersonline['content'] .= $view->getTemplate('usersonline-row', $uodata);
 			}	

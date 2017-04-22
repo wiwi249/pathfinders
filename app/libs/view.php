@@ -50,12 +50,13 @@ class View {
 		$this->templateset[$key] = $value;
 	}
 	
-	function getTemplate($template, $values = array()) {
+	function getTemplate($template, $values = array(), $renderDefaults = true) {
 		global $db, $content, $site;
-		$values['siteurl'] = $site->siteurl;
-		$values['CURTEMPLATE_PATH'] = $this->templateInfo['currentTemplatePath'];
+		if($renderDefaults) {		
+			$values['siteurl'] = $site->siteurl;
+			$values['CURTEMPLATE_PATH'] = $this->templateInfo['currentTemplatePath'];
+		}
 		$query = $db->MakeQuery("SELECT * FROM templates WHERE name='".$template."';");
-		
 		$results = $db->FetchRes($query);
 		
 		return $this->renderTemplate($results['content'], $values);

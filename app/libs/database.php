@@ -64,4 +64,11 @@ class Database {
 	public function Esc($string) {
 		return addslashes($string);
 	}
+	
+	/* Returns last worked ID whether updated or inserted
+	*/
+	
+	public function LastId() {
+		return $this->pdo->lastInsertId();
+	}
 }

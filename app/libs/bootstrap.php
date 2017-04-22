@@ -1,6 +1,8 @@
 <?php
 class Bootstrap {
-	 function __construct() {
+	private $ctrl;
+
+	function __construct() {
 	 	$url = isset($_GET['url']) ? $_GET['url'] : null;
 	 	$url = rtrim($url, '/');
 	 	$url = explode('/', $url);
@@ -28,6 +30,8 @@ class Bootstrap {
 		}
 		
 		$db->MakeQuery("UPDATE usersessions SET time='".time()."' WHERE user=".$_SESSION['id'].";");
+		
+		$controller = NULL;
 		
 		if($url[0] == 'login') {
 			require_once('controllers/login.php');
@@ -72,6 +76,11 @@ class Bootstrap {
 		else {
 			require_once($path);
 			if(isset($url[1])) {
+					//following object creation should have logging preserved
+					//as it will always throw bugs if the controller doesnt take
+					//both of the arguments
+					//or in a situation if there is any error in the controller code
+					//remove comments for debug mode
 				if(isset($url[2]))
 					$controller = new $url[0]($url[1], $url[2]);
 				else
@@ -79,19 +88,14 @@ class Bootstrap {
 			} else {
 				$controller = new $url[0];
 			}
+			
+			$this->ctrl = $controller;
 
 			return;
 		}
 	}
 	 
-	private function get_controller_data($controller) {
-		global $db;
-		$query = $db->MakeQuery("SELECT * FROM sys_controllers WHERE url='".$controller."';");
-		$num = $db->NumRows($query);
-		if($num == 0) {
-			return $num;
-		}
-		$results = $db->FetchRes($query);
-		return $results;
+	public function getControllerObject() {
+		return $this->ctrl;
 	}
 }

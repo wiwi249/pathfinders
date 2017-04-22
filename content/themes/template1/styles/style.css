@@ -49,7 +49,16 @@ button {
 	font-family:inherit;
 	font-size:inherit;
 	cursor:pointer;
+	margin-right:3px;
+	margin-left:3px;
+}
 
+.sortable {
+	cursor: s-resize;
+}
+
+select {
+	padding:10px 5px;
 }
 
 img.icon {
@@ -64,6 +73,11 @@ button:hover {
 a, a:visited {
 	color:#b1d2d8;
 	text-decoration:none;
+}
+
+.navigation {
+	padding-top:0px;
+	padding-bottom:5px;
 }
 #loginbox {
 	margin-top:200px;
@@ -415,7 +429,7 @@ div.table {
 	display:table;
 }
 
-div.table input[type="text"], div.table input[type="password"] {
+div.table input[type="text"], div.table input[type="password"], div.table select {
 	width:100%;
 }
 
@@ -429,6 +443,15 @@ div.table .trow {
 
 div.table .trow:not(:first-child) > div {
 	border-top:1px solid #d8d8d8;
+}
+
+.thead {
+	padding:10px;
+	display:table-caption;
+	width:100%;
+	background:rgba(54, 86, 222, 0.4);
+	font-size:25px;
+	color:white;
 }
 
 div.table .trow > div {
@@ -544,6 +567,66 @@ ul.category-list > ul > li:hover:before {
 	opacity:1.0;
 }
 
+ul.tlist {
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+
+ul.tlist li {
+	width:100%;
+	padding:0px;
+	background:rgba(203,203,203,0.3);
+	transition-duration:0.2s;
+	transition-property:background;
+	-webkit-transition-duration:0.2s;
+	-webkit-transition-property:background;
+}
+
+ul.tlist li:not(:first-child) {
+	border-top:1px solid #d8d8d8;
+}
+
+ul.tlist li:after {
+	display:block;
+	clear:both;
+	content:'';
+}
+
+ul.tlist li > div {
+	float:left;
+	height:40px;
+	line-height:40px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+
+ul.ftypes-table li > div:first-child {
+	width:60%;
+	text-align:left;
+	padding-left:15px;
+}
+
+ul.ftypes-table li > div:nth-child(2) {
+	width:20%;
+	text-align:center;
+}
+ul.ftypes-table li > div:nth-child(3) {
+	width:20%;
+	text-align:right;
+}
+
+ul.dbase-options-list li > div:first-child {
+	width:60%;
+	text-overflow:ellipsis;
+	padding-left:10px;
+}
+
+ul.dbase-options-list li > div:nth-child(2) {
+	width:40%;
+	text-align:right;
+}
+
 footer {
 	position:absolute;
 	padding:5px 5px;
@@ -560,4 +643,18 @@ footer {
 
 #lenght {
 	height:1000px;
+}
+.users-online-list > div > div:first-child {
+	width:40px;
+}
+
+.users-online-list > div > div:not(:first-child) {
+	text-align:left !important;
+}
+
+.users-online-list img {
+	height:30px;
+	width:30px;
+	margin-right:10%;
+	border-radius:50%;
 }

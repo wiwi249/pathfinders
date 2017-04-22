@@ -1,0 +1,52 @@
+{
+	"field":[
+		{
+			"name":"text",
+			"btname":"Tekstowe",
+			"load":"FieldTextValue",
+			"input":"FieldTextInput",
+			"values":0
+		},
+
+		{
+			"name":"date",
+			"btname":"Data",
+			"load":"FieldDateValue",
+			"input":"FieldDateInput",
+			"values":0,
+			"specialtemplate":true
+		},
+		
+		{
+			"name":"textarea",
+			"btname":"Notatka",
+			"load":"FieldLongTextValue",
+			"input":"FieldLongTextInput",
+			"values":0
+		},
+		
+		{
+			"name":"dropdown",
+			"btname":"Lista rozwijana",
+			"load":"FieldDropdownValue",
+			"input":"FieldDropdownInput",
+			"values":1
+		},
+		
+		{
+			"name":"checkbox",
+			"btname":"Checkbox",
+			"load":"FieldCheckBoxValue",
+			"input":"FieldCheckBoxInput",
+			"values":0
+		},
+		
+		{
+			"name":"checkboxgroup",
+			"btname":"Grupa Checkboxów",
+			"load":"FieldCheckBoxGroupValue",
+			"input":"FieldCheckBoxGroupInput",
+			"values":1
+		}
+	]
+}

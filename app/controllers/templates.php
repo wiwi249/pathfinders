@@ -69,10 +69,11 @@ class Templates {
 			
 			$view->set("header", "Edytuj szablon");
 			
-			$query = $db->MakeQuery("SELECT content FROM templates WHERE id='".$id."';");
+			$query = $db->MakeQuery("SELECT name,content FROM templates WHERE id='".$id."';");
 			$row = $db->FetchRes($query);
 			$replace["content"] = htmlentities($row["content"]);
-			$content = $view->getTemplate("templates-edit", $replace);
+			//!!!	$replace["content"] = preg_replace(); 
+			$content = $view->getTemplate("templates-edit", $replace, false);
 			
 			$view->set('content', $content);
 			$view->render();

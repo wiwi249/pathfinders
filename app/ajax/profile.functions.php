@@ -1,8 +1,9 @@
 <?php
 
-function GetProfilePicture($nick) {
+function GetProfilePicture() {
 	global $db;
 
+	$nick = $_POST['arg'];
 	$result = 0;
 	if(!empty($nick)) {
 		$query = $db->MakeQuery("SELECT id FROM users WHERE nick='".$nick."';");
